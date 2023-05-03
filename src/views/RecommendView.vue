@@ -102,57 +102,57 @@ function findDishes(num) {
 }
 function findWindow(num) {
   switch (num) {
-    case 11:
+    case 10:
       return "休闲餐厅F1";
-    case 12:
+    case 11:
       return "风味餐厅F1";
+    case 12:
+      return "有窗有空调";
     case 13:
-      return "有窗有空调";
+      return "有窗有空调有风扇";
     case 14:
-      return "有窗有空调有风扇";
+      return "有窗有空调有风扇有电扇";
     case 15:
-      return "有窗有空调有风扇有电扇";
-    case 16:
       return "有窗有空调有风扇有电扇有风扇";
+    case 20:
+      return "无窗";
     case 21:
-      return "无窗";
-    case 22:
       return "有窗";
+    case 30:
+      return "无窗";
     case 31:
-      return "无窗";
+      return "有窗";
     case 32:
-      return "有窗";
-    case 33:
       return "有窗有空调";
-    case 34:
+    case 33:
       return "有窗有空调有风扇";
-    case 35:
+    case 34:
       return "有窗有空调有风扇有电扇";
-    case 36:
+    case 35:
       return "有窗有空调有风扇有电扇有风扇";
-    case 41:
+    case 40:
       return "无窗";
-    case 42:
+    case 41:
       return "有窗";
-    case 51:
+    case 50:
+      return "无窗";
+    case 60:
       return "无窗";
     case 61:
-      return "无窗";
-    case 62:
       return "有窗";
+    case 70:
+      return "无窗";
     case 71:
-      return "无窗";
-    case 72:
       return "有窗";
-    case 73:
+    case 72:
       return "有窗有空调";
-    case 81:
+    case 80:
       return "东";
-    case 82:
+    case 81:
       return "南";
-    case 83:
+    case 82:
       return "西";
-    case 84:
+    case 83:
       return "北";
   }
 }

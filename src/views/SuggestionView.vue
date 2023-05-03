@@ -15,7 +15,7 @@ import { ref } from "vue";
 import { watchEffect } from "vue";
 watchEffect(async () => {
   const response = await fetch(
-    "https://www.qsc.zju.edu.cn/playground/eat/api/suggestion/get",
+    "https://playground.zjuqsc.com/eat/api/suggestion/get",
     {
       method: "POST",
       headers: {
