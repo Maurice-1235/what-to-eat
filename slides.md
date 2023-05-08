@@ -39,12 +39,18 @@ May 7, 2023
 
 # Presentation Overview
 
-- **Background** - focus on the content with Markdown, and then style them later
-- **Problesm**
+- **Background**
+  - Introduction to Shapley Value
+  - General Problems
+  - Problems remained in ICDT 2020
+- **Solution**
+  - Overview
+  - Theoretical Analysis
+  - Exact Computation
+  - Inexact Computation
+- **Conclusion**
+- **References**
 
-- **Conclusion** -
-- **References** -
-  <!-->problesm that are left unsolved in icdt 2020<!-->
   <br>
   <br>
 
@@ -64,330 +70,107 @@ h1 {
 haha
 -->
 
----
-
-# Background
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|                                                    |                             |
-| -------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
-| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                      | previous slide              |
-| <kbd>down</kbd>                                    | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-<!-- Shapley value is a game-theoretic notion for wealth distribution that is nowadays extensively used to explain complex data-intensive computation, -->
-<!-- Recent t theoretical works show that query evaluation over rela-
-tional databases￿ts well in this explanation paradigm.  -->
-<!-- no practical solution to the computational challenge inherent to the computation, two effective solutions for computing -->
-<!-- sol 1. capture the dependence of query answers using boolean expressions and then transform it to a particular circuit form in which we devise an algorithm for computing sp -->
-<!-- sol2. faster yet inexact approach that transforms it into CNF and uses a herustic form to compute the sp -->
-<!-- datasets with imdb and tpch -->
----
-
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+## <!-- problesm that are left unsolved in icdt 2020 -->
 
 ---
 
-<!-- devise an explanation based on the provenance of the query that were used to derive the answes
-Unfortunately, the number of relevant routes might be large, also it is conceivable that different facts differ considerably in their importance to the answer
- -->
+# Background - Shapley Value
 
-# Code
+Shapley value is a game-theoretic notion for wealth distribution that is nowadays extensively used to explain complex data-intensive computation.
 
-Use code snippets and get the highlighting directly![^1]
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  role: string;
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id);
-  const newUser = { ...user, ...update };
-  saveUser(id, newUser);
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+- Research show that query evaluation over relational databases fits well in this explanation paradigm.
+- Airport problem
+<center>
+  <img src="屏幕截图 2023-05-08 211310.png" width="500" height="100">
+</center>
+    <style>
+    h1 {
+      background-color: #2B90B6;
+      background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+      background-size: 100%;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-text-fill-color: transparent;
+    }
+    </style>
+    <!-- no practical solution to the computational challenge inherent to the computation, two effective solutions for computing -->
+    <!-- sol 1. capture the dependence of query answers using boolean expressions and then transform it to a particular circuit form in which we devise an algorithm for computing sp -->
+    <!-- sol2. faster yet inexact approach that transforms it into CNF and uses a herustic form to compute the sp -->
 
 ---
 
-# Components
+# Background - Problems in Calculating Shapley Value
 
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-
-## class: px-20
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-## preload: false
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div v-motion :initial="{ x: -80 }" :enter="{ x: 0 }">Slidev</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
+- calculation of the shapley value is NP-hard in general
+- the number of possible coalitions is exponential in the number of facts
 
 <br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
 <br>
 
-[Learn more](https://sli.dev/guide/syntax#latex)
+### ICDT 2020
+
+- showed mainly lower bounds on the complexity of computing the Shapley value of facts in query answering
+  - gives polynomial-time algorithm for self-join-free conjunctive queries
+- need a large number of executions of the query over database subsets
+- does not provide sufficient evidence
 
 ---
 
-# Diagrams
+# Solution - Overview
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+### Two Approaches
 
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
+- Exact Computation
+  - capture the dependence of query answers using boolean expressions
+  - transform it to a d-DNNF circuit form in which we devise an algorithm for computing shapley value
+    Note: given a d-DNNF circuit, we can compute the shapley value in polynomial time with the help of c2d and provsql
+- Inexact Computation
+  - not necessarily compute exact Shapley values, determine the order of facts according to their Shapley values
+  - faster yet inexact approach that transforms it into CNF Proxy
 
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+<!-- tsetyin? -->
 
 ---
 
-src: ./pages/multiple-entries.md
-hide: false
+# Solution - Overview
+
+**Shapley value can be computed in polynomial time whenever the query can be evaluated in polynomial time over tuple-independent probablistic databases.**
+
+- Algortihm 1: compiling to a deterministic and decomposable circuit
+- Algorithm 2: resort to CNF proxy which is fast yet inexact if timeout reaches
+- Hybrid approach: Algorithm 1 + Algorithm 2
+  <img src="屏幕截图 2023-05-08 183708.png" class="relative top-5 left-20"/>
+  <br>
 
 ---
 
+# Theoretical Analysis - Reduction
+
+Corollary: If q is a safe UCQ then shapley(q) can be solved in polynomial time
+non-boolean setting of the problem may be reduced to that of boolean queries
+
 ---
 
-layout: center
-class: text-center
+# Exact Computation
+
+Recently, research proved that when the models are given as circuits from knowledge compilation can be computed in polynomial time(SHAP scores). The same approach can be applied to the computation of Shapley value.
 
 ---
 
-# Learn More
+# Inexact Computation
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+---
+
+# Conclusion - Experimental Results
+
+- knowledge compilation using the c2d compiler
+- datasets
+  - TPC-H (removing nested queries and queries with aggregation)
+  - IMDB
+- Algorithm1 yields an overall 84.43% success rate for TPC-H and 99.96% for IMDB,
+- Algorithm2 is very efficient and that the ranking based on CNF proxies is very close to the ranking based on the exact Shapley value
+
+# References
+
+---
