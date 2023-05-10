@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+
 # apply any windi css classes to the current slide
 class: "text-center"
 # https://sli.dev/custom/highlighters.html
@@ -29,11 +29,9 @@ css: unocss
 
 SIGMOD 22 Session 22: Provenance and Uncertainty
 
-BlaBlabla
+By 钟瑞峥 林俊光
 
-By
-
-May 7, 2023
+May 10, 2023
 
 ---
 
@@ -150,11 +148,18 @@ Shapley value is a game-theoretic notion for wealth distribution that is nowaday
 Corollary: If q is a safe UCQ then shapley(q) can be solved in polynomial time
 non-boolean setting of the problem may be reduced to that of boolean queries
 
+<div>
+<img width="300" src="屏幕截图 2023-05-09 210337.png">
+<img width="300"  src="屏幕截图 2023-05-09 210409.png">
+</div>
+
 ---
 
 # Exact Computation
 
 Recently, research proved that when the models are given as circuits from knowledge compilation can be computed in polynomial time(SHAP scores). The same approach can be applied to the computation of Shapley value.
+
+Lemma Given as input a d-DNNF Boolean Circuit C, and an integer k, we can compute in polynomial time the quantity $#SAT_k(C)$
 
 ---
 
