@@ -76,10 +76,13 @@ haha
 
 Shapley value is a game-theoretic notion for wealth distribution that is nowadays extensively used to explain complex data-intensive computation.
 
+$\begin{aligned} & \operatorname{Shapley}\left(q, D_{\mathrm{n}}, D_{\mathrm{x}}, f\right) \stackrel{\text { def }}{=} \\ & \qquad \sum_{E \subseteq D_{\mathrm{n}} \backslash\{f\}} \frac{|E| !\left(\left|D_{\mathrm{n}}\right|-|E|-1\right) !}{\left|D_{\mathrm{n}}\right| !}\left(q\left(D_{\mathrm{x}} \cup E \cup\{f\}\right)-q\left(D_{\mathrm{x}} \cup E\right)\right)\end{aligned}$
+
 - Research show that query evaluation over relational databases fits well in this explanation paradigm.
 - Airport problem
+
 <center>
-  <img src="屏幕截图 2023-05-08 211310.png" width="500" height="100">
+  <img src="屏幕截图 2023-05-08 211310.png" width="300" height="50">
 </center>
     <style>
     h1 {
@@ -234,24 +237,145 @@ $(A \wedge B) \vee (A \wedge ((\neg B \vee E)\wedge F)$
   <img width="300" height="600"  src="屏幕截图 2023-05-09 210409.png">
   </div>
 </div>
+<br />
+
+For every self-join free boolean queries, either q is hierarchical and shapley(q) can be solved in polynomial time, or q is not hierarchical and shapley(q) is intractable
+
+Proposition: For every Boolean query q, we have that Shapley $(q) \leq_{\mathrm{T}}^{\mathrm{p}} \operatorname{PQE}(q)$
+
+Proof:
+
+$\# \operatorname{Slices}\left(q, D_{\mathrm{x}}, D_{\mathrm{n}}, k\right) \stackrel{\text { def }}{=} \mid\left\{E \subseteq D_{\mathrm{n}}|| E \mid=k\right.$ and $\left.q\left(D_{\mathrm{x}} \cup E\right)=1\right\} \mid$.
+
+$\begin{aligned} & \operatorname{Shapley}\left(q, D_{\mathrm{n}}, D_{\mathrm{x}}, f\right)= \\ & \begin{aligned} \sum_{k=0}^{\left|D_{\mathrm{n}}\right|-1} \frac{k !\left(\left|D_{\mathrm{n}}\right|-k-1\right)!}{\left|D_{\mathrm{n}}\right|!}( & \# \operatorname{Slices}\left(q, D_{\mathrm{x}} \cup\{f\}, D_{\mathrm{n}} \backslash\{f\}, k\right)&\left.-\# \operatorname{Slices}\left(q, D_{\mathrm{x}}, D_{\mathrm{n}} \backslash\{f\}, k\right)\right) .\end{aligned}\end{aligned}$
+
+Arithmetic terms can be computed in polynomial time
+
+---
+
+# Theoretical Analysis - Reduction
+
 <br>
-Corollary: If q is a safe UCQ then shapley(q) can be solved in polynomial time
+We want to prove that #Slices can be computed in polynomial time
 
-<style>
+$(1+z)^n \operatorname{Pr}\left(q,\left(D_z, \pi_z\right)\right)=\sum_{i=0}^n z^i \# \operatorname{Slices}\left(q, D_{\mathrm{x}}, D_{\mathrm{n}}, i\right)$
 
-</style>
+We can now call an oracle to PQE(q) on n+1 databases $D_{z_0}, \ldots, D_{z_n}$ for distinct values $z_0=0, z_1=1, \ldots, z_n=n$.
 
 ---
 
 # Exact Computation
 
-Recently, research proved that when the models are given as circuits from knowledge compilation can be computed in polynomial time(SHAP scores). The same approach can be applied to the computation of Shapley value.
+Recently, research proved that when the models are given as circuits from knowledge compilation can be computed in polynomial time(SHAP scores).
 
-Lemma Given as input a d-DNNF Boolean Circuit C, and an integer k, we can compute in polynomial time the quantity $#SAT_k(C)$
+The same approach can be applied to the computation of Shapley value.
+
+Proposition: Given as input a deterministic and decomposable circuit $C$ representing $\operatorname{ELin}\left(q, D_{\mathrm{n}}, D_{\mathrm{x}}\right)$ for a database $D=D_{\mathrm{X}} \cup$ $D_{\mathrm{n}}$ and Boolean query $q$, and an endogenous fact $f \in D_{\mathrm{n}}$, we can compute in polynomial time (in $|C|)$ the value Shapley $\left(q, D_{\mathrm{n}}, D_{\mathrm{x}}, f\right)$.
+
+We can rewrite the equation as following:
+
+$\begin{aligned} \operatorname{Shapley}\left(q, D_{\mathrm{n}}, D_{\mathrm{x}}, f\right)=\sum_{k=0}^{\left|D_{\mathrm{n}}\right|-1} \frac{k !\left(\left|D_{\mathrm{n}}\right|-k-1\right)}{\left|D_{\mathrm{n}}\right|}(  \left.\text { \#SAT }_k\left(C_1\right)-\# \mathrm{SAT}_k\left(C_2\right)\right) .\end{aligned}$
+
+Lemma: Given as input a d-DNNF Boolean Circuit C, and an integer k, we can compute in polynomial time the quantity $SAT_k(C)$.
+
+---
+
+# Exact Computation
+
+<br>
+Proof: Let X = Vars(C) and n = |X|
+We denote by
+
+$\phi_g$ the boolean function over the variables Var(g) that is represented by this gate
+
+$a_l^g$ = $\#SAT_l(\phi_g)$ the number of assignments of size $l$ to Vars(g) that satisfy $\phi_g$
+
+### Variable gate.
+
+- $\alpha_g^0$ is 0 and $\alpha_g^1$ is 1 .
+  <br>
+
+### $\neg gate$
+
+- If $g$ is a $\neg$-gate with input gate $g^{\prime}$, then $\alpha_g^{\ell}=\left(\begin{array}{c}|\operatorname{Vars}(g)| \\ l\end{array}\right)-\alpha_{g^{\prime}}^{\ell}$ for every $\ell \in\{0, \ldots,|\operatorname{Vars}(g)|\}$.
+
+---
+
+# Exact Computation
+
+### Deterministic $\vee$-gate
+
+Define $S_1 \stackrel{\text { def }}{=} \operatorname{Vars}\left(g_2\right) \backslash \operatorname{Vars}\left(g_1\right)$ and similarly $S_2 \stackrel{\text { def }}{=} \operatorname{Vars}\left(g_1\right) \backslash$ $\operatorname{Vars}\left(g_2\right)$. Since $g$ is deterministic, we have:
+
+$$
+\operatorname{SAT}\left(\varphi_g\right)=\left(\operatorname{SAT}\left(\varphi_{g_1}\right) \otimes 2^{S_1}\right) \cup\left(\operatorname{SAT}\left(\varphi_{g_2}\right) \otimes 2^{S_2}\right)
+$$
+
+with the union being disjoint. By intersecting with the assignments of $\operatorname{Vars}(g)$ of size $\ell$, we obtain:
+
+$$
+\begin{aligned}
+\operatorname{SAT}_{\ell}\left(\varphi_g\right)= & {\left[\left(\operatorname{SAT}\left(\varphi_{g_1}\right) \otimes 2^{S_1}\right) \cap\{v \subseteq \operatorname{Vars}(g)|| v \mid=\ell\}\right] } \\
+& \cup\left[\left(\operatorname{SAT}\left(\varphi_{g_2}\right) \otimes 2^{S_2}\right) \cap\{v \subseteq \operatorname{Vars}(g)|| v \mid=\ell\}\right]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\# \operatorname{SAT}_{\ell}\left(\varphi_g\right)= & \left|\left(\operatorname{SAT}\left(\varphi_{g_1}\right) \otimes 2^{S_1}\right) \cap\{v \subseteq \operatorname{Vars}(g)|| v \mid=\ell\}\right| \\
+& +\left|\left(\operatorname{SAT}\left(\varphi_{g_2}\right) \otimes 2^{S_2}\right) \cap\{v \subseteq \operatorname{Vars}(g)|| v \mid=\ell\}\right|
+\end{aligned}
+$$
+
+$\left|\left(\operatorname{SAT}\left(\varphi_{g_1}\right) \otimes 2^{S_1}\right) \cap\{v \subseteq \operatorname{Vars}(g)|| v \mid=\ell\}\right|$ =
+$
+\sum_{i=\max \left(0, \ell-\left|S_1\right|\right)}^{\min \left(\ell, \operatorname{Vars}\left(g_1\right) \mid\right)} \alpha_{g_1}^i \times\left(\begin{array}{c}
+\left|S_1\right| \\
+\ell-i
+\end{array}\right) \text {. }
+$
+
+---
+
+# Exact Computation
+
+### Decomposable $\wedge$-gate.
+
+$$
+\operatorname{SAT}\left(\varphi_g\right)=\operatorname{SAT}\left(\varphi_{g_1}\right) \otimes \operatorname{SAT}\left(\varphi_{g_2}\right)
+$$
+
+We now intersect with the set of assignments of $\operatorname{Vars}(g)$ of size $l$ to obtain
+
+$$
+\alpha_g^{\ell}=\# \operatorname{SAT}_{\ell}\left(\varphi_g\right)=\sum_{i=\max \left(0, \ell-\left|\operatorname{Vars}\left(g_2\right)\right|\right)}^{\min \left(\ell,\left|\operatorname{Vars}\left(g_1\right)\right|\right)} \alpha_{g_1}^i \times \alpha_{g_2}^{\ell-i}
+$$
+
+---
+
+# Exact Computation
+
+<img src="algo1.png" width="200">
 
 ---
 
 # Inexact Computation
+
+<br>
+Based on the observation that having a high shapley score is correlated with
+
+- Appearing many times of the provenance
+- Having few alternatives
+
+Shapley $(h, x) \stackrel{\text { def }}{=} \sum_{S \subseteq X \backslash\{x\}} \frac{|S| !(|X|-|S|-1) !}{|X| !}(h(S \cup\{x\})-h(S))$.
+
+<img src="formula2.png" width="400">
+
+---
+
+# Inexact Computation
+
+<img src="algo2.png" width="200">
 
 ---
 
