@@ -290,6 +290,8 @@ $\phi_g$ the boolean function over the variables Var(g) that is represented by t
 
 $a_l^g$ = $\#SAT_l(\phi_g)$ the number of assignments of size $l$ to Vars(g) that satisfy $\phi_g$
 
+$\mathrm{SAT}_k(\varphi) \stackrel{\text { def }}{=} \operatorname{SAT}(\varphi) \cap\{v \subseteq X|| v \mid=k\}$
+
 ### Variable gate.
 
 - $\alpha_g^0$ is 0 and $\alpha_g^1$ is 1 .
@@ -298,6 +300,7 @@ $a_l^g$ = $\#SAT_l(\phi_g)$ the number of assignments of size $l$ to Vars(g) tha
 ### $\neg gate$
 
 - If $g$ is a $\neg$-gate with input gate $g^{\prime}$, then $\alpha_g^{\ell}=\left(\begin{array}{c}|\operatorname{Vars}(g)| \\ l\end{array}\right)-\alpha_{g^{\prime}}^{\ell}$ for every $\ell \in\{0, \ldots,|\operatorname{Vars}(g)|\}$.
+  <img class="absolute top-20 left-180" src="decision tree.png" width="300">
 
 ---
 
