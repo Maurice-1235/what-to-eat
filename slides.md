@@ -355,7 +355,7 @@ $$
 
 # Exact Computation
 
-<img src="algo1.png" width="200">
+<img src="algo1.png" width="300">
 
 ---
 
@@ -375,7 +375,7 @@ Shapley $(h, x) \stackrel{\text { def }}{=} \sum_{S \subseteq X \backslash\{x\}}
 
 # Inexact Computation
 
-<img src="algo2.png" width="200">
+<img src="algo2.png" width="400">
 
 ---
 
